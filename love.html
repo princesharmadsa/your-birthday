@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Sacramento&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sacramento', cursive, sans-serif;
+            background: linear-gradient(180deg, #ffdde1, #ee9ca7, #ffdde1);
+            background-size: 200% 200%;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            animation: backgroundMove 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 105, 135, 0.7);
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
+            opacity: 0.8;
+            animation: floatHearts 8s infinite ease-in-out;
+        }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) translateX(0px) scale(0.8); opacity: 0.7; }
+            50% { transform: translateY(50vh) translateX(15px) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(-15px) scale(0.9); opacity: 0; }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-family: 'Great Vibes', cursive;
+            color: #d74b76;
+        }
+
+        .image-frame {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 320px;
+            border: 5px solid #d74b76;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        p {
+            font-size: 1.4em;
+            color: #444;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 1.7em;
+            font-weight: bold;
+            color: #d74b76;
+        }
+
+        .button {
+            background-color: #d74b76;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 1.4em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #ec7a92;
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 1.4em;
+            color: #d74b76;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="heart-container" id="heartContainer"></div>
+    
+    <div class="container">
+        <h1>My Love,</h1>
+        <div class="image-frame">
+            <img src="us.jpg" alt="A beautiful memory together">
+        </div>
+        <p>I know I’ve made mistakes, and I may have hurt you in ways I never intended. For that, I am truly sorry. You are someone I cherish deeply, and the thought of losing you made me realize how much you mean to me.</p>
+        <p>This gift is not just a birthday present—it’s a small piece of my heart, wrapped with love, care, and all the emotions I sometimes fail to express.</p>
+        <p>The flower pot is a symbol of us. I want you to plant something in it and watch it grow—just like our bond, stronger and more beautiful with time.</p>
+        <p>The diary is for you because I know your mind is always running, filled with thoughts, dreams, worries, and unspoken words. I want this to be a safe space for you—where you can pour your heart out, free from judgment.</p>
+        <p>The rose petals are there because you remind me of them—gentle, beautiful, and full of love.</p>
+        <p>The small heart on the card is a symbol of my love. Just like each thread is carefully woven together, our bond is made of countless moments, emotions, and memories.</p>
+        <p>No matter what happens, please know that you are special to me. I promise to be better, to listen more, and to never take you for granted. I love you, and I always will.</p>
+        <p class="footer">Happy Birthday, betu♥️<br>Princhu ❤️</p>
+        <button class="button" onclick="toggleMessageAndMusic()">Click Here for My Love</button>
+        <p id="extraMessage" class="hidden-message">You're my heart, my love, my everything. Forever and always, with all my love. 💖</p>
+    </div>
+
+    <script>
+        function toggleMessageAndMusic() {
+            const music = document.getElementById("bg-music");
+            const message = document.getElementById("extraMessage");
+            
+            if (music.paused) {
+                music.play().catch(error => console.log("Music play error: ", error));
+            }
+            message.style.display = "block";
+        }
+
+        function createHearts() {
+            const heartContainer = document.getElementById('heartContainer');
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                heart.addEventListener('animationend', () => heart.remove());
+                heartContainer.appendChild(heart);
+            }
+        }
+        
+        createHearts();
+    </script>
+</body>
+</html>
